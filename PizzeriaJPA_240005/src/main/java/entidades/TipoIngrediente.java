@@ -5,23 +5,29 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Chris
  */
 @Entity
-@Table(name = "tipos")
+@Table(name = "tiposIngredientes")
 
 public class TipoIngrediente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "id_tipo")
+    @Column(name = "idTipo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -32,17 +38,18 @@ public class TipoIngrediente implements Serializable {
     private List<Ingrediente> ingredientes;
 
     public TipoIngrediente() {
-
+        this.ingredientes = new ArrayList();
     }
 
-    public TipoIngrediente(String descripcion, <any>   ingredientes) {
+    public TipoIngrediente(String descripcion) {
         this.descripcion = descripcion;
-        this.ingredientes = ingredientes;
+        this.ingredientes = new ArrayList();
     }
 
     public TipoIngrediente(Long id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
+        this.ingredientes = new ArrayList();
     }
 
     public Long getId() {
@@ -51,10 +58,6 @@ public class TipoIngrediente implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public TipoIngrediente(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public String getDescripcion() {
@@ -71,6 +74,17 @@ public class TipoIngrediente implements Serializable {
 
     public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("TipoIngrediente{");
+        sb.append("id=").append(id);
+        sb.append(", descripcion=").append(descripcion);
+        sb.append(", ingredientes=").append(ingredientes);
+        sb.append('}');
+        return sb.toString();
     }
 
 }

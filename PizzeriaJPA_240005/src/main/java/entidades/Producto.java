@@ -5,12 +5,17 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +29,7 @@ public class Producto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "idProducto")
     private Long id;
 
     @Column(name = "nombre")
@@ -36,17 +41,26 @@ public class Producto implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    public Producto() {
-    }
+    @ManyToMany()
+    @JoinTable(name = "producto_ingrediente",
+            joinColumns = @JoinColumn(name = "idProducto"),
+            inverseJoinColumns = @JoinColumn(name = "idIngrediente"))
+    private List<Ingrediente> ingredientes;
 
-    public Producto(Long id) {
-        this.id = id;
+    @ManyToMany(mappedBy = "productos")
+    private List<Venta> ventas;
+
+    public Producto() {
+        this.ingredientes = new ArrayList<>();
+        this.ventas = new ArrayList<>();
     }
 
     public Producto(String nombre, float precio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.ingredientes = new ArrayList();
+        this.ventas = new ArrayList<>();
     }
 
     public Producto(Long id, String nombre, float precio, String descripcion) {
@@ -54,6 +68,8 @@ public class Producto implements Serializable {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.ingredientes = new ArrayList();
+        this.ventas = new ArrayList<>();
     }
 
     public Long getId() {
@@ -86,6 +102,22 @@ public class Producto implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
     }
 
     @Override

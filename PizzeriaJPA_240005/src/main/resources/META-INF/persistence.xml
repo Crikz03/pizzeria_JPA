@@ -5,6 +5,7 @@
     <class>entidades.Producto</class>
     <class>entidades.Ingrediente</class>
     <class>entidades.TipoIngrediente</class>
+    <class>entidades.Venta</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pizzeria"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

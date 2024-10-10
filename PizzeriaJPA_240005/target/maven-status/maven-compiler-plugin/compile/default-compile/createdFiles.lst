@@ -1,2 +1,10 @@
-com\whatever\pizzeriajpa_240005\PizzeriaJPA_240005.class
+dao\VentaDAO.class
+dao\IngredienteDAO.class
+entidades\Venta.class
+com\whatever\pizzeriajpa_240005\PruebaConsultas.class
 entidades\Producto.class
+entidades\Ingrediente.class
+com\whatever\pizzeriajpa_240005\PruebaPersistir.class
+dao\ProductoDAO.class
+conexion\Conexion.class
+entidades\TipoIngrediente.class
